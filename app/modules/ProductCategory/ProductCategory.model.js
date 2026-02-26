@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-const GoldCategorySchema = Schema(
+const ProductCategorySchema = Schema(
   {
     imageName: {
       type: String,
@@ -19,6 +19,6 @@ const GoldCategorySchema = Schema(
   { timestamps: true }
 );
 
-const GoldCategory = model("GoldCategory", GoldCategorySchema);
+const ProductCategory = model("ProductCategory", ProductCategorySchema);
 
-export default GoldCategory;
+export default ProductCategory;

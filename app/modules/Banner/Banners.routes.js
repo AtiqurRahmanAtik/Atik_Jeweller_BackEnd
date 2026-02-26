@@ -13,6 +13,7 @@ import { authenticateToken } from "../../../middleware/authMiddleware.js";
 
 const BannerRoutes = Router();
 
+
 // Protect all routes with authentication middleware
 BannerRoutes.get("/", authenticateToken, getAllBanners);
 BannerRoutes.get("/:branch/get-all", authenticateToken, getBannersByBranch);

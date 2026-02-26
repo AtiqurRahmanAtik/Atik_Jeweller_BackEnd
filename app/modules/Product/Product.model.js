@@ -30,6 +30,8 @@ const ProductSchema = Schema(
     category: {
       type: String,
       required: [true, "Please provide the category"],
+      
+
     },
     tag: {
       type: [String],

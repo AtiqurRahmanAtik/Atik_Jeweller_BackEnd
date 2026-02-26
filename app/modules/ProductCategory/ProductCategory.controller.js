@@ -1,14 +1,14 @@
-import GoldCategory from "./GoldCategory.model.js";
+import ProductCategory from "./ProductCategory.model.js";
 
-export async function getAllGoldCategories(req, res) {
+export async function getAllProductCategories(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
     const [result, totalCategories] = await Promise.all([
-      GoldCategory.find().skip(skip).limit(limit).sort({ createdAt: -1 }),
-      GoldCategory.countDocuments()
+      ProductCategory.find().skip(skip).limit(limit).sort({ createdAt: -1 }),
+      ProductCategory.countDocuments()
     ]);
 
     res.status(200).json({
@@ -26,7 +26,7 @@ export async function getAllGoldCategories(req, res) {
   }
 }
 
-export async function getGoldCategoriesByBranch(req, res) {
+export async function getProductCategoriesByBranch(req, res) {
   const branch = req.params.branch;
   try {
     const page = parseInt(req.query.page) || 1;
@@ -34,8 +34,8 @@ export async function getGoldCategoriesByBranch(req, res) {
     const skip = (page - 1) * limit;
 
     const [result, totalCategories] = await Promise.all([
-      GoldCategory.find({ branch }).skip(skip).limit(limit).sort({ createdAt: -1 }),
-      GoldCategory.countDocuments({ branch }) 
+      ProductCategory.find({ branch }).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      ProductCategory.countDocuments({ branch }) 
     ]);
 
     res.status(200).json({
@@ -53,59 +53,59 @@ export async function getGoldCategoriesByBranch(req, res) {
   }
 }
 
-// Get gold category by ID
-export async function getGoldCategoryById(req, res) {
+// Get product category by ID
+export async function getProductCategoryById(req, res) {
   const id = req.params.id;
   try {
-    const result = await GoldCategory.findById(id);
+    const result = await ProductCategory.findById(id);
     if (result) {
       res.status(200).json(result);
     } else {
-      res.status(404).json({ message: "Gold category not found" });
+      res.status(404).json({ message: "Product category not found" });
     }
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 }
 
-// Create a new gold category
-export async function createGoldCategory(req, res) {
+// Create a new product category
+export async function createProductCategory(req, res) {
   try {
-    const goldCategoryData = req.body;
-    const result = await GoldCategory.create(goldCategoryData);
+    const productCategoryData = req.body;
+    const result = await ProductCategory.create(productCategoryData);
     res.status(201).json(result);
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 }
 
-// Update a gold category by ID
-export async function updateGoldCategory(req, res) {
+// Update a product category by ID
+export async function updateProductCategory(req, res) {
   const id = req.params.id;
-  const goldCategoryData = req.body;
+  const productCategoryData = req.body;
   try {
-    const result = await GoldCategory.findByIdAndUpdate(id, goldCategoryData, {
+    const result = await ProductCategory.findByIdAndUpdate(id, productCategoryData, {
       new: true,
     });
     if (result) {
       res.status(200).json(result);
     } else {
-      res.status(404).json({ message: "Gold category not found" });
+      res.status(404).json({ message: "Product category not found" });
     }
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
 }
 
-// Remove a gold category by ID
-export async function removeGoldCategory(req, res) {
+// Remove a product category by ID
+export async function removeProductCategory(req, res) {
   const id = req.params.id;
   try {
-    const result = await GoldCategory.findByIdAndDelete(id);
+    const result = await ProductCategory.findByIdAndDelete(id);
     if (result) {
-      res.status(200).json({ message: "Gold category deleted successfully" });
+      res.status(200).json({ message: "Product category deleted successfully" });
     } else {
-      res.status(404).json({ message: "Gold category not found" });
+      res.status(404).json({ message: "Product category not found" });
     }
   } catch (err) {
     res.status(500).send({ error: err.message });

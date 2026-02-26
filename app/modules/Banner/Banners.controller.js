@@ -1,5 +1,6 @@
 import Banner from "./Banners.model.js";
 
+
 export async function getAllBanners(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
