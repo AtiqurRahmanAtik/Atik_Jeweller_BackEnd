@@ -17,10 +17,6 @@ const BannerSchema = Schema(
       type: String,
       required: [true, "Please provide the banner url"],
     },
-    bannerPhoto: {
-      type: String,
-      required: [true, "Please provide the banner photo"],
-    },
     branch: {
       type: String,
       required: [true, "Please provide the branch"],

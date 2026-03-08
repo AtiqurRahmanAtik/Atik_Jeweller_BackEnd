@@ -17,10 +17,7 @@ const ThreeDotImageSchema = Schema(
       type: String,
       required: [true, "Please provide the image url"],
     },
-    imagePhoto: {
-      type: String,
-      required: [true, "Please provide the image photo"],
-    },
+    
     branch: {
       type: String,
       required: [true, "Please provide the branch"],

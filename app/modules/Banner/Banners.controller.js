@@ -74,6 +74,7 @@ export async function getBannerById(req, res) {
 export async function createBanner(req, res) {
   try {
     const bannerData = req.body;
+    console.log("banner Images : ", bannerData)
     const result = await Banner.create(bannerData);
     res.status(201).json(result);
   } catch (err) {

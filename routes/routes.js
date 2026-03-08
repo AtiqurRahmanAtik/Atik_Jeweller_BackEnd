@@ -12,14 +12,19 @@ import rolepermissionRoutes from "../app/modules/RolePermission/rolePermission.r
 import bannerRoutes from "../app/modules/Banner/Banners.routes.js";
 import threeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
 
-import ProductRoutes from "../app/modules/Product/Product.routes.js";
 
-import ProductCategoryRoutes from "../app/modules/ProductCategory/ProductCategory.routes.js";
+
+
 
 
 // Used Controllers / Middleware
 import { getImageUrl } from "../config/space.js";
 import transactionLogger from "../middleware/transactionLogger.js";
+
+import MetalTypeRoutes from "../app/modules/MetalType/MetalTypes.routes.js";
+import PurityRoutes from "../app/modules/Purity/Purities.routes.js";
+import DailyPriceRoutes from "../app/modules/DailyPrice/DailyPrices.routes.js";
+
 
 
 const routes = Router();
@@ -38,9 +43,12 @@ routes.use("/role-permissions", rolepermissionRoutes);
 routes.post("/get-image-url", getImageUrl);
 routes.use("/banners", bannerRoutes);
 routes.use("/three-dot-images", threeDotImageRoutes);
-routes.use("/product-categories", ProductCategoryRoutes);
-routes.use("/products", ProductRoutes);
 
+
+
+routes.use("/metaltype", MetalTypeRoutes);
+routes.use("/purities", PurityRoutes);
+routes.use("/daily-price", DailyPriceRoutes);
 
 
 

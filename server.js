@@ -14,6 +14,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
+app.use(cors()); 
+app.use(express.json());
+
 
 // ================= DATABASE =================
 connectDB();
@@ -37,6 +40,7 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS
       "http://localhost:3000",
     ];
 
+
 app.use(
   cors({
     origin: function (origin, callback) {
@@ -49,6 +53,7 @@ app.use(
     credentials: true,
   })
 );
+
 
 
 // ================= BODY PARSING =================
