@@ -25,6 +25,8 @@ import MetalTypeRoutes from "../app/modules/MetalType/MetalTypes.routes.js";
 import PurityRoutes from "../app/modules/Purity/Purities.routes.js";
 import DailyPriceRoutes from "../app/modules/DailyPrice/DailyPrices.routes.js";
 import GoldCategoryRoutes from "../app/modules/GoldCategory/GoldCategories.routes.js";
+import StockRoutes from "../app/modules/Stock/Stocks.routes.js";
+import GoldProductRoutes from "../app/modules/GoldProduct/GoldProducts.routes.js";
 
 
 
@@ -51,6 +53,8 @@ routes.use("/metaltype", MetalTypeRoutes);
 routes.use("/purities", PurityRoutes);
 routes.use("/daily-price", DailyPriceRoutes);
 routes.use("/gold-categories", GoldCategoryRoutes);
+routes.use("/stock", StockRoutes); 
+routes.use("/gold-products", GoldProductRoutes);
 
 
 
