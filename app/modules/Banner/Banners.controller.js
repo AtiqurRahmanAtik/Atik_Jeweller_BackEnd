@@ -1,5 +1,5 @@
+// app/modules/Banner/Banners.controller.js
 import Banner from "./Banners.model.js";
-
 
 export async function getAllBanners(req, res) {
   try {
@@ -26,7 +26,6 @@ export async function getAllBanners(req, res) {
     res.status(500).send({ error: err.message });
   }
 }
-
 
 export async function getBannersByBranch(req, res) {
   const branch = req.params.branch;
@@ -71,14 +70,25 @@ export async function getBannerById(req, res) {
 }
 
 // Create a new banner
+// app/modules/Banner/Banners.controller.js
+
 export async function createBanner(req, res) {
   try {
-    const bannerData = req.body;
-    console.log("banner Images : ", bannerData)
-    const result = await Banner.create(bannerData);
+    const { bannerName, bannerUrl, branch } = req.body;
+
+    // Validation check before saving
+    if (!bannerName || !bannerUrl || !branch) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Missing required fields: bannerName, bannerUrl, or branch" 
+      });
+    }
+
+    const result = await Banner.create({ bannerName, bannerUrl, branch });
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    console.error("Backend Error:", err); // This shows the error in your terminal
+    res.status(500).json({ error: err.message });
   }
 }
 

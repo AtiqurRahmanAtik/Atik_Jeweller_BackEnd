@@ -14,11 +14,11 @@ import { authenticateToken } from "../../../middleware/authMiddleware.js";
 const SaleRoutes = Router();
 
 // Protect all routes with authentication middleware
-SaleRoutes.get("/", authenticateToken, getAllSales);
-SaleRoutes.get("/:branch/get-all", authenticateToken, getSalesByBranch);
-SaleRoutes.get("/get-id/:id", authenticateToken, getSaleById);
-SaleRoutes.post("/post", authenticateToken, createSale);
-SaleRoutes.put("/update/:id", authenticateToken, updateSale);
-SaleRoutes.delete("/delete/:id", authenticateToken, removeSale);
+SaleRoutes.get("/",  getAllSales);
+SaleRoutes.get("/:branch/get-all",  getSalesByBranch);
+SaleRoutes.get("/get-id/:id",  getSaleById);
+SaleRoutes.post("/post",  createSale);
+SaleRoutes.put("/update/:id",  updateSale);
+SaleRoutes.delete("/delete/:id",  removeSale);
 
 export default SaleRoutes;

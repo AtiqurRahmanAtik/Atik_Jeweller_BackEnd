@@ -1,21 +1,17 @@
+// app/modules/Banner/Banners.model.js
 import mongoose from "mongoose";
 
 const { Schema, model } = mongoose;
 
 const BannerSchema = Schema(
   {
-    bannerNumber: {
-      type: Number,
-      required: [true, "Please provide the banner number"],
-      unique: true,
-    },
     bannerName: {
       type: String,
       required: [true, "Please provide the banner name"],
     },
     bannerUrl: {
       type: String,
-      required: [true, "Please provide the banner url"],
+      required: [true, "Please provide the banner URL"],
     },
     branch: {
       type: String,
