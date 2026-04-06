@@ -30,6 +30,8 @@ import WebProductRoutes from "../app/modules/WebProduct/WebProducts.routes.js";
 import ThreeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
 import TrendyCollectionRoutes from "../app/modules/TrendyCollection/TrendyCollections.routes.js";
 import AutumnCollectionRoutes from "../app/modules/AutumnCollection/AutumnCollections.routes.js";
+import TwoDotBannerRoutes from "../app/modules/TwoDotBanner/TwoDotBanner.routes.js";
+import OrderRoutes from "../app/modules/Order/Orders.routes.js";
 
 
 
@@ -52,6 +54,8 @@ routes.post("/get-image-url", getImageUrl);
 routes.use("/banners", BannerRoutes);
 
 routes.use("/three-dot-images", ThreeDotImageRoutes);
+// Add this line to the active routes section
+routes.use("/two-dot-banners", TwoDotBannerRoutes);
 
 
 
@@ -63,6 +67,9 @@ routes.use("/daily-price", DailyPriceRoutes);
 routes.use("/gold-categories", GoldCategoryRoutes);
 routes.use("/stock", StockRoutes); 
 routes.use("/gold-products", GoldProductRoutes);
+
+
+routes.use("/orders", OrderRoutes);
 
 routes.use("/customer", CustomerRoutes);
 routes.use("/sales", SaleRoutes);
