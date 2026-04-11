@@ -32,6 +32,7 @@ import TrendyCollectionRoutes from "../app/modules/TrendyCollection/TrendyCollec
 import AutumnCollectionRoutes from "../app/modules/AutumnCollection/AutumnCollections.routes.js";
 import TwoDotBannerRoutes from "../app/modules/TwoDotBanner/TwoDotBanner.routes.js";
 import OrderRoutes from "../app/modules/Order/Orders.routes.js";
+import PurchaseRoutes from "../app/modules/Purchase/Purchases.routes.js";
 
 
 
@@ -65,10 +66,12 @@ routes.use("/trendy-collections", TrendyCollectionRoutes);
 routes.use("/autumn-collections", AutumnCollectionRoutes);
 routes.use("/daily-price", DailyPriceRoutes);
 routes.use("/gold-categories", GoldCategoryRoutes);
+
 routes.use("/stock", StockRoutes); 
 routes.use("/gold-products", GoldProductRoutes);
 
 
+routes.use("/purchases", PurchaseRoutes);
 routes.use("/orders", OrderRoutes);
 
 routes.use("/customer", CustomerRoutes);

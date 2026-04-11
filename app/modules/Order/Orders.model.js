@@ -14,7 +14,7 @@ const OrderItemSchema = new Schema(
       required: [true, "Please provide the product name"],
     },
     category: {
-      type: String,                                  // ✅ added category
+      type: String, // ✅ added category
     },
     salesPrice: {
       type: Number,
@@ -30,13 +30,13 @@ const OrderItemSchema = new Schema(
       min: [1, "Quantity must be at least 1"],
     },
     Total: {
-      type: Number,                                  // ✅ was lineTotal
+      type: Number, // ✅ was lineTotal
     },
     VAT: {
-      type: Number,                                  // ✅ was lineVat
+      type: Number, // ✅ was lineVat
     },
     TotalWithVat: {
-      type: Number,                                  // ✅ was lineTotalWithVat
+      type: Number, // ✅ was lineTotalWithVat
     },
   },
   { _id: false }
@@ -49,7 +49,14 @@ const OrderSchema = new Schema(
       type: Number,
       required: [true, "Please provide the order ID"],
     },
-
+    Invoice: {
+      type: Number,
+      required: [true, "Please provide the Invoice ID"],
+    },
+    customerName: {
+      type: String, // ✅ Added customerName
+      default: "Walk-in Customer",
+    },
     Products: {
       type: [OrderItemSchema],
       required: [true, "Please provide at least one item"],
@@ -58,10 +65,9 @@ const OrderSchema = new Schema(
         message: "Order must contain at least one item",
       },
     },
-
     price: {
       type: Number,
-      required: [true, "Please provide the price"],
+      required: [true, "Please provide the price (subtotal)"],
     },
     discount: {
       type: Number,

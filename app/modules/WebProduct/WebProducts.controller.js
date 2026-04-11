@@ -1,5 +1,7 @@
 import WebProduct from "./WebProducts.model.js";
 
+// --- EXISTING CONTROLLERS ---
+
 export async function getAllWebProducts(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -25,8 +27,6 @@ export async function getAllWebProducts(req, res) {
     res.status(500).send({ error: err.message });
   }
 }
-
-
 
 export async function getWebProductsByBranch(req, res) {
   const branch = req.params.branch;
@@ -55,7 +55,6 @@ export async function getWebProductsByBranch(req, res) {
   }
 }
 
-// Get web product by ID
 export async function getWebProductById(req, res) {
   const id = req.params.id;
   try {
@@ -70,28 +69,23 @@ export async function getWebProductById(req, res) {
   }
 }
 
-
-// Create a new web product
-// Create a new web product
 export async function createWebProduct(req, res) {
   try {
     const webProductData = req.body;
     const result = await WebProduct.create(webProductData);
     res.status(201).json(result);
   } catch (err) {
-    // Return 400 for Mongoose Validation Errors
     res.status(400).json({ error: err.message }); 
   }
 }
 
-// Update a web product by ID
 export async function updateWebProduct(req, res) {
   const id = req.params.id;
   const webProductData = req.body;
   try {
     const result = await WebProduct.findByIdAndUpdate(id, webProductData, {
       new: true,
-      runValidators: true, // <--- ADD THIS LINE
+      runValidators: true, 
     });
     if (result) {
       res.status(200).json(result);
@@ -99,12 +93,10 @@ export async function updateWebProduct(req, res) {
       res.status(404).json({ message: "WebProduct not found" });
     }
   } catch (err) {
-    // If validation fails (e.g. wrong enum), it will be caught here
-    res.status(400).json({ error: err.message }); // Changed to 400 Bad Request
+    res.status(400).json({ error: err.message }); 
   }
 }
 
-// Remove a web product by ID
 export async function removeWebProduct(req, res) {
   const id = req.params.id;
   try {
@@ -114,6 +106,46 @@ export async function removeWebProduct(req, res) {
     } else {
       res.status(404).json({ message: "WebProduct not found" });
     }
+  } catch (err) {
+    res.status(500).send({ error: err.message });
+  }
+}
+
+// --- NEW SEARCH CONTROLLER ---
+
+export async function searchWebProducts(req, res) {
+  try {
+    const searchTerm = req.query.q || ""; // Extract search query
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Define search conditions using $or to search across multiple fields
+    // $options: "i" makes the search case-insensitive
+    const searchCriteria = {
+      $or: [
+        { title: { $regex: searchTerm, $options: "i" } },
+        { category: { $regex: searchTerm, $options: "i" } },
+        { tag: { $regex: searchTerm, $options: "i" } }
+      ]
+    };
+
+    // Execute search and get total count simultaneously for pagination
+    const [result, totalWebProducts] = await Promise.all([
+      WebProduct.find(searchCriteria).skip(skip).limit(limit).sort({ createdAt: -1 }),
+      WebProduct.countDocuments(searchCriteria)
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: result,
+      pagination: {
+        totalItems: totalWebProducts,
+        totalPages: Math.ceil(totalWebProducts / limit),
+        currentPage: page,
+        itemsPerPage: limit
+      }
+    });
   } catch (err) {
     res.status(500).send({ error: err.message });
   }
