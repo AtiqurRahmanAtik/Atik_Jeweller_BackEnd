@@ -25,7 +25,7 @@ import GoldCategoryRoutes from "../app/modules/GoldCategory/GoldCategories.route
 import StockRoutes from "../app/modules/Stock/Stocks.routes.js";
 import GoldProductRoutes from "../app/modules/GoldProduct/GoldProducts.routes.js";
 import CustomerRoutes from "../app/modules/Customer/Customers.routes.js";
-import SaleRoutes from "../app/modules/Sales/Sales.routes.js";
+
 import WebProductRoutes from "../app/modules/WebProduct/WebProducts.routes.js";
 import ThreeDotImageRoutes from "../app/modules/ThreeDotImage/ThreeDotImages.routes.js";
 import TrendyCollectionRoutes from "../app/modules/TrendyCollection/TrendyCollections.routes.js";
@@ -33,6 +33,8 @@ import AutumnCollectionRoutes from "../app/modules/AutumnCollection/AutumnCollec
 import TwoDotBannerRoutes from "../app/modules/TwoDotBanner/TwoDotBanner.routes.js";
 import OrderRoutes from "../app/modules/Order/Orders.routes.js";
 import PurchaseRoutes from "../app/modules/Purchase/Purchases.routes.js";
+import SaleRoutes from "../app/modules/Sale/Sales.routes.js";
+import PosSaleRoutes from "../app/modules/PosSales/PosSales.routes.js";
 
 
 
@@ -73,9 +75,11 @@ routes.use("/gold-products", GoldProductRoutes);
 
 routes.use("/purchases", PurchaseRoutes);
 routes.use("/orders", OrderRoutes);
+routes.use("/pos-sales", PosSaleRoutes);
+
 
 routes.use("/customer", CustomerRoutes);
-routes.use("/sales", SaleRoutes);
+routes.use("/sales", SaleRoutes); // Added Sale route mapping
 routes.use("/web-products", WebProductRoutes);
 
 

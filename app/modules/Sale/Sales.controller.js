@@ -1,5 +1,6 @@
 import Sale from "./Sales.model.js";
 
+// Get all sales with pagination
 export async function getAllSales(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -26,6 +27,7 @@ export async function getAllSales(req, res) {
   }
 }
 
+// Get sales by branch with pagination
 export async function getSalesByBranch(req, res) {
   const branch = req.params.branch;
   try {
@@ -75,7 +77,12 @@ export async function createSale(req, res) {
     const result = await Sale.create(saleData);
     res.status(201).json(result);
   } catch (err) {
-    res.status(500).send({ error: err.message });
+   
+    if (err.code === 11000) {
+      return res.status(400).json({ error: "Invoice number already exists. Please use a unique invoice number." });
+    }
+  
+    res.status(400).send({ error: err.message });
   }
 }
 
@@ -85,15 +92,21 @@ export async function updateSale(req, res) {
   const saleData = req.body;
   try {
     const result = await Sale.findByIdAndUpdate(id, saleData, {
-      new: true,
+      new: true, 
+      runValidators: true, 
     });
+    
     if (result) {
       res.status(200).json(result);
     } else {
       res.status(404).json({ message: "Sale not found" });
     }
   } catch (err) {
-    res.status(500).send({ error: err.message });
+    // Handle MongoDB duplicate key error on update
+    if (err.code === 11000) {
+      return res.status(400).json({ error: "Invoice number already exists. Please use a unique invoice number." });
+    }
+    res.status(400).send({ error: err.message });
   }
 }
 
